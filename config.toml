@@ -1,5 +1,6 @@
 baseURL = "https://www.example.com"
 title = "Test"
+disableKinds = ["taxonomyTerm"]
 
 [taxonomies]
   tag = "tags"
