@@ -6,6 +6,10 @@
     {{.Content}}
   </article>
   <ul>
+{{ $string := "blog/tags/" | absURL | string }}
+{{ if eq (.Permalink | string) $string }}
+<---- Render posts with tags ---->
+{{ else }}
   {{ range .Pages }}
   <li>
     <a href="{{.Permalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>{{ if .Draft }} :: DRAFT{{ end }}
@@ -14,6 +18,7 @@
     {{ end }}
   </li>
   {{ end }}
+{{ end }}
   </ul>
   </main>
 {{ end }}
