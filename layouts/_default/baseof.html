@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <div class="header"><p>{{ block "title" . }}{{ .Title }}{{ end }}</p></div>
+    <div id="page">
+      {{ block "main" . }}
+      {{ .Content }}
+      {{ end }}
+    </div>
+  </body>
+</html>

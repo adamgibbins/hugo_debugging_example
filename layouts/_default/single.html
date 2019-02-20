@@ -1,0 +1,21 @@
+{{ define "title" }}{{ .Site.Title}} - {{ .Page.Section | title }}{{ end }}
+{{ define "main" }}
+{{ $taxonomy := "tags" }}
+<a href="{{ .Section | relURL }} ">&lt;&lt; Back</a>
+<main>
+<div class="subheader">
+  {{ block "subheader" . }}<h1>{{ .Title }}</h1>{{ end }}
+  <div class="meta">
+    {{ .Date.Format "Jan 2, 2006" }} &nbsp; {{ .WordCount }} words &nbsp;
+    {{ with .Param $taxonomy }}
+      {{ range $index, $tag := . }}
+        {{ with $.Site.GetPage (printf "/%s/%s" $taxonomy $tag) -}}
+          #<a href="{{ .Permalink }}">{{ $tag | urlize }}</a>
+        {{- end -}}
+      {{- end -}}
+    {{ end }}
+  </div>
+</div>
+{{ .Content }}
+</main>
+{{ end }}

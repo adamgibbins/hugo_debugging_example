@@ -1,0 +1,19 @@
+{{ define "title" }}{{ .Site.Title}} - {{ .Page.Section | title }}{{ end }}
+{{ define "main" }}
+<a href="/">&lt;&lt; Home</a>
+<main>
+  <article>
+    {{.Content}}
+  </article>
+  <ul>
+  {{ range .Pages }}
+  <li>
+    <a href="{{.Permalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>{{ if .Draft }} :: DRAFT{{ end }}
+    {{ range .Params.tags }}
+    <span style="color: grey; font-size: 10px">#<a href="/blog/tags/{{ . | urlize | relURL }}">{{ . }}</a></span>
+    {{ end }}
+  </li>
+  {{ end }}
+  </ul>
+  </main>
+{{ end }}
