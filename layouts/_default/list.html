@@ -8,7 +8,18 @@
   <ul>
 {{ $string := "blog/tags/" | absURL | string }}
 {{ if eq (.Permalink | string) $string }}
-<---- Render posts with tags ---->
+  <-- start --><br />
+  {{ $taxo := "tags" }} <!-- Use the plural form here -->
+  {{ .Param $taxo }}
+  <ul id="{{ $taxo }}">
+  {{ range .Param $taxo }}
+      {{ $name := . }}
+      {{ with $.Site.GetPage (printf "/%s/%s" $taxo ($name | urlize)) }}
+          <li><a href="{{ .Permalink }}">{{ $name }}</a></li>
+      {{ end }}
+  {{ end }}
+  </ul>
+  <br /><-- end -->
 {{ else }}
   {{ range .Pages }}
   <li>
